@@ -21,11 +21,9 @@ defmodule Todo.List do
     %__MODULE__{todo_list | entries: new_entries, auto_id: todo_list.auto_id + 1}
   end
 
-  @spec entries(todo_list :: t(), date :: Date.t()) :: t()
+  @spec entries(todo_list :: t(), date :: Date.t()) :: [entry()] | []
   def entries(todo_list, date) do
-    todo_list.entries
-    |> Stream.filter(fn {_id, entry} -> entry.date == date end)
-    |> Enum.map(fn {_id, entry} -> entry end)
+    for {_id, entry} <- todo_list.entries, entry.date == date, do: entry
   end
 
   @spec update_entry(todo_list :: t(), new_entry :: entry()) :: t()
