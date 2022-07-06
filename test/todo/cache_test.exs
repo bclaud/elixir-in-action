@@ -1,13 +1,13 @@
 defmodule Todo.CacheTest do
   use ExUnit.Case
 
-  test "server_process" do
-    Todo.System.start_link()
-    bob_pid = Todo.Cache.server_process("bob")
+  # test "server_process" do
+  #   Todo.System.start_link()
+  #   bob_pid = Todo.Cache.server_process("bob")
 
-    assert bob_pid != Todo.Cache.server_process("alice")
-    assert bob_pid == Todo.Cache.server_process("bob")
-  end
+  #   assert bob_pid != Todo.Cache.server_process("alice")
+  #   assert bob_pid == Todo.Cache.server_process("bob")
+  # end
 
   test "todo operations" do
     Todo.System.start_link()

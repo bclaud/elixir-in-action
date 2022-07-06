@@ -1,12 +1,10 @@
 defmodule Todo.Database do
   use GenServer
 
-  @max_workers 3
-
-  @db_folder "./storage"
+  @db_folder "./persist"
 
   def start do
-    IO.puts("Starting database Server")
+    IO.puts("Starting database server.")
 
     GenServer.start(__MODULE__, nil, name: __MODULE__)
   end
@@ -40,9 +38,8 @@ defmodule Todo.Database do
   end
 
   defp start_workers() do
-    for index <- 1..@max_workers, into: %{} do
+    for index <- 1..3, into: %{} do
       {:ok, pid} = Todo.DatabaseWorker.start(@db_folder)
-
       {index - 1, pid}
     end
   end
