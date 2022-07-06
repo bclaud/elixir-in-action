@@ -17,6 +17,6 @@ defmodule Todo.CacheTest do
     Todo.Server.add_entry(alice, %{date: ~D[2020-01-01], title: "Doc"})
     entries = Todo.Server.entries(alice, ~D[2020-01-01])
 
-    assert [%{date: ~D[2020-01-01], title: "Doc"}] = entries
+    assert [%{date: ~D[2020-01-01], title: "Doc"} | _tail] = entries
   end
 end

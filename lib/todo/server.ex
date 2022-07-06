@@ -15,6 +15,10 @@ defmodule Todo.Server do
     GenServer.call(todo_server, {:entries, date})
   end
 
+  def all_entries(todo_server) do
+    GenServer.call(todo_server, {:all_entries})
+  end
+
   @impl GenServer
   def init(name) do
     {:ok, {name, Todo.Database.get(name) || Todo.List.new()}}
@@ -32,6 +36,15 @@ defmodule Todo.Server do
     {
       :reply,
       Todo.List.entries(todo_list, date),
+      {name, todo_list}
+    }
+  end
+
+  @impl GenServer
+  def handle_call({:all_entries}, _, {name, todo_list}) do
+    {
+      :reply,
+      Todo.List.all_entries(todo_list),
       {name, todo_list}
     }
   end

@@ -61,4 +61,16 @@ defmodule Todo.ListTest do
     assert Todo.List.size(todo_list) == 2
     assert Todo.List.entries(todo_list, ~D[2018-12-20]) == []
   end
+
+  test "all entries" do
+    todo_list =
+      Todo.List.new()
+      |> Todo.List.add_entry(%{date: ~D[2020-01-01], title: "Shopping"})
+      |> Todo.List.add_entry(%{date: ~D[2020-02-01], title: "Something important"})
+
+    assert Todo.List.all_entries(todo_list) == [
+             %{date: ~D[2020-01-01], id: 1, title: "Shopping"},
+             %{date: ~D[2020-02-01], id: 2, title: "Something important"}
+           ]
+  end
 end

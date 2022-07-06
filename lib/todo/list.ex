@@ -26,6 +26,11 @@ defmodule Todo.List do
     for {_id, entry} <- todo_list.entries, entry.date == date, do: entry
   end
 
+  @spec all_entries(todo_list :: t()) :: [entry()] | []
+  def all_entries(todo_list) do
+    for {_id, entry} <- todo_list.entries, do: entry
+  end
+
   @spec update_entry(todo_list :: t(), new_entry :: entry()) :: t()
   def update_entry(todo_list, %{} = new_entry) do
     update_entry(todo_list, new_entry.id, fn _ -> new_entry end)
